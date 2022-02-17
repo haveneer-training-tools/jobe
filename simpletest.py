@@ -34,6 +34,16 @@ int main() {
 """
 
 
+RUST_CODE = """
+use std::error::Error;
+
+fn main() -> Result<(), Box<dyn Error>> {
+    println!("Trust in Rust");
+    Ok(())
+}
+"""
+
+
 JAVA_CODE = """
 public class Blah {
     public static void main(String[] args) {
@@ -157,6 +167,9 @@ def main():
     display_result(result_obj)
     print("\n\nRunning C++")
     result_obj = run_test('cpp', CPP_CODE, 'test.cpp')
+    display_result(result_obj)
+    print("\n\nRunning Rust")
+    result_obj = run_test('rust', RUST_CODE, 'test.rs')
     display_result(result_obj)
     print("\n\nRunning Java")
     result_obj = run_test('java', JAVA_CODE, 'Blah.java')
