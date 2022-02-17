@@ -16,7 +16,7 @@ class Rust_Task extends Task {
 
     public function __construct($filename, $input, $params) {
         parent::__construct($filename, $input, $params);
-        $this->default_params['compileargs'] = array();
+        $this->default_params['memorylimit'] = 500; // MB
     }
 
     public static function getVersionCommand() {
@@ -29,6 +29,7 @@ class Rust_Task extends Task {
         $compileargs = $this->getParam('compileargs');
         $linkargs = $this->getParam('linkargs');
         $cmd = "rustc " . implode(' ', $compileargs) . " -o $execFileName $src " . implode(' ', $linkargs);
+        $cmd = "CARGO_HOME=".getenv("CARGO_HOME")." RUSTUP_HOME=".getenv("RUSTUP_HOME")." $cmd";
         list($output, $this->cmpinfo) = $this->run_in_sandbox($cmd);
     }
 
